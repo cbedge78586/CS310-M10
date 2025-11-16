@@ -1,4 +1,4 @@
-﻿// Charles Edge
+// Charles Edge
 // CS310-T301
 // M10: Assignment
 // Source CH12, Programming Exercise 3
@@ -6,41 +6,61 @@
 
 #include <iostream>
 #include <string>
-#include <iomanip> 
+#include <iomanip>
+#include <algorithm> 
 
 using namespace std;
+
+// Function for integer input validation, as per feedback from M7: Assignment
+int getPositiveInt(const string& prompt) {
+    int value;
+    bool valid = false;
+    do {
+        cout << prompt;
+        if (!(cin >> value) || value <= 0) {
+            cout << "You entered an invalid input. Please enter a positive whole number, not an alpha character.\n";
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+        else {
+            valid = true;
+        }
+    } while (!valid);
+    return value;
+}
 
 int main() {
     int numCand;
 
     cout << "\n*****************************************\n";
-    cout << "         CANDIDATE PARTICIPATION";
+    cout << "           CANDIDATE PARTICIPATION";
     cout << "\n*****************************************\n\n";
+
 // User enters number of candidates
-    cout << "Enter the number of candidates that will participate in the election: ";
-    cin >> numCand;
+    numCand = getPositiveInt("Enter the number of candidates that will participate in the election: ");
 
 // Creates dynamic array
-
     string* cand = new string[numCand];
     int* votes = new int[numCand];
     int totalVotes = 0;
 
     cout << "\n*****************************************\n";
-    cout << "           CANDIDATE INFORMATION";
+    cout << "            CANDIDATE INFORMATION";
     cout << "\n*****************************************\n\n";
+
     for (int i = 0; i < numCand; ++i) {
         cout << "Enter the last name of candidate #" << i + 1 << ": ";
         cin >> cand[i];
-        cout << "Enter the number of votes received by " << cand[i] << ": ";
-        cin >> votes[i];
+
+// Input validation for votes received
+        votes[i] = getPositiveInt("Enter the number of votes received by " + cand[i] + ": ");
 
         totalVotes += votes[i];
     }
 
 // Outputs the results
     cout << "\n*****************************************\n";
-    cout << "          ELECTION RESULTS";
+    cout << "            ELECTION RESULTS";
     cout << "\n*****************************************\n\n";
     cout << left << setw(20) << "Candidate Name"
         << right << setw(10) << "Votes"
@@ -65,7 +85,7 @@ int main() {
         << right << setw(10) << totalVotes
         << right << setw(15) << "100.00%" << endl;
     cout << "\n*****************************************\n";
-    cout << "                  WINNER";
+    cout << "              WINNER";
     cout << "\n*****************************************\n";
 
 
