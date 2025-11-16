@@ -3,6 +3,7 @@
 // M10: Assignment
 // Source CH12, Programming Exercise 3
 // Remade programming excercise 7 of Ch 8 using dynamic arrays
+// Updated on 11.16.25 to add basic input validation as per feedback from M7 Assignment
 
 #include <iostream>
 #include <string>
@@ -108,3 +109,4 @@ int main() {
     }
     return 0;
 }
+
